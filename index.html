@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor de Música | Test Neumorphism</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="content_main ctnt">
+        <div id="content-cover">
+            <img class="cover" src="https://i.ibb.co/G3qL1XT/img.webp" alt="PlayList" />
+            <img class="logo rotate" src="https://i.postimg.cc/pT6X0k6d/Logo-Gen-Ap.png" alt="Logo" />
+        </div>
+        <div class="content-audio">
+            <div style="display:none;">
+                <iframe src="audio.html" style="border:none; width:0; height:0;"></iframe>
+            </div>
+        </div>
+        
+        <!-- Barra de Volumen -->
+        <div id="volume-bar">
+            <div id="volume-container">
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+            </div>
+        </div>
+
+        <div class="audio-time">
+            <span id="current-time">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+        <div class="controls">
+            <button class="custom-btn btn-play" id="play">
+                <span id="icon" class="icons fas fa-play"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer con Botones -->
+    <footer>
+        <div class="footer-buttons">
+            <button onclick="window.location.href='index.html'">INICIO</button>
+            <button onclick="window.location.href='programas.html'">PROGRAMAS</button>
+            <button onclick="window.location.href='#video-predicas'">VIDEOS</button>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+    <script>
+        const volumeControl = document.getElementById('volume');
+
+        // Guardar el volumen en localStorage
+        volumeControl.addEventListener('input', (event) => {
+            const audioIframe = document.querySelector('iframe').contentWindow.document.getElementById('audio');
+            audioIframe.volume = event.target.value;
+            localStorage.setItem('volume', audioIframe.volume); // Guardar el volumen en localStorage
+        });
+
+        // Recuperar el volumen al cargar la página
+        const savedVolume = localStorage.getItem('volume');
+        if (savedVolume) {
+            const audioIframe = document.querySelector('iframe').contentWindow.document.getElementById('audio');
+            audioIframe.volume = savedVolume; // Ajustar el volumen del audio
+            volumeControl.value = savedVolume; // Ajustar el control deslizante
+        }
+    </script>
+</body>
+</html>
