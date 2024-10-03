@@ -220,22 +220,34 @@ footer button:hover {
 /* Adaptabilidad móvil */
 @media (max-width: 600px) {
   #progress-bar, #volume-bar {
-    width: 250px;
+    width: 90%; /* Cambiado a un ancho del 90% para que se ajuste mejor */
+    margin: 0 auto; /* Centrar el elemento */
   }
   
   .audio-time {
-    width: 250px;
-    font-size: 0.9em;
+    width: 90%; /* Cambiado a un ancho del 90% para que se ajuste mejor */
+    font-size: 1.2em; /* Aumentar el tamaño de la fuente */
+    text-align: center; /* Centrar el texto */
   }
 
   .controls {
     gap: 15px;
+    flex-direction: column; /* Apilar los controles verticalmente */
+    align-items: center; /* Centrar los elementos en la dirección transversal */
+  }
+
+  .custom-btn {
+    width: 100%; /* Botones ocupan el 100% del ancho disponible */
+    height: 50px; /* Aumentar la altura del botón */
+    font-size: 1em; /* Aumentar el tamaño de fuente para que sea más fácil de tocar */
+    padding: 0; /* Quitar padding para ajustar el tamaño del botón */
   }
 
   footer button {
-    width: 80px;
-    height: 35px;
-    font-size: 0.9em; /* Ajustar el tamaño de fuente para dispositivos móviles */
-    padding: 0 5px; /* Añadir padding para mejorar la apariencia */
+    width: 100%; /* Botones en el footer ocupan el 100% del ancho */
+    height: 50px; /* Aumentar la altura del botón */
+    font-size: 1em; /* Aumentar el tamaño de fuente para dispositivos móviles */
+    padding: 0; /* Quitar padding para ajustar el tamaño del botón */
+    margin: 5px 0; /* Añadir espacio entre botones */
   }
 }
