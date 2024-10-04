@@ -44,12 +44,9 @@ body {
 
 /* Estilo de la cubierta sin animación por defecto */
 .cover {
-  width: 0.0px;
-  height: 0.0px;
+  width: 0px; /* Cambiado a 0px */
+  height: 0px; /* Cambiado a 0px */
   border-radius: 0%;
-}
-
-
 }
 
 @keyframes rotate {
@@ -209,33 +206,6 @@ footer button {
   overflow: hidden; /* Esconde el texto que se desborda */
 }
 
-footer button:active {
-  box-shadow: inset -4px -4px 10px #ffffff, inset 4px 4px 10px #babecc;
-}
-
 footer button:hover {
-  color: #000;
-}
-
-/* Adaptabilidad móvil */
-@media (max-width: 600px) {
-  #progress-bar, #volume-bar {
-    width: 250px;
-  }
-  
-  .audio-time {
-    width: 250px;
-    font-size: 0.9em;
-  }
-
-  .controls {
-    gap: 15px;
-  }
-
-  footer button {
-    width: 80px;
-    height: 35px;
-    font-size: 0.9em; /* Ajustar el tamaño de fuente para dispositivos móviles */
-    padding: 0 5px; /* Añadir padding para mejorar la apariencia */
-  }
+  background: #cc75ff;
 }
