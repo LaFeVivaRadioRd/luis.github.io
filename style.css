@@ -175,6 +175,37 @@ body {
   margin: 0.5em 0;
 }
 
+/* Colores originales de cada red social */
+.facebook {
+    color: #3b5998; /* Azul Facebook */
+}
+
+.youtube {
+    color: #FF0000; /* Rojo YouTube */
+}
+
+.instagram {
+    color: #C13584; /* Rosa Instagram */
+}
+
+.tiktok {
+    color: #69C9D0; /* Azul Tiktok */
+}
+
+.whatsapp {
+    color: #25D366; /* Verde Whatsapp */
+}
+
+/* Estilos opcionales para el hover */
+.nav a:hover {
+    opacity: 0.8; /* Efecto de hover (opcional) */
+}
+
+
+.social-icon:hover {
+    opacity: 0.7; /* Cambia la opacidad en hover para un efecto */
+}
+
 /* Botones del footer */
 footer {
   width: 100%;
@@ -210,34 +241,13 @@ footer button:hover {
   background: #cc75ff;
 }
 
-//////////////////////////////////////////////
-
 /* Adaptabilidad móvil */
 @media (max-width: 600px) {
     .content_main {
-        padding: 1em; /* Espaciado para pantallas pequeñas */
+        padding: 1em; /* Aumenta el padding en pantallas pequeñas */
     }
 
-    .schedule h2 {
-        font-size: 1.5em; /* Tamaño de fuente más pequeño */
-    }
-
-    .schedule ul {
-        padding-left: 0; /* Sin padding para la lista */
-    }
-
-    .schedule li {
-        font-size: 0.9em; /* Tamaño de fuente más pequeño para los elementos de la lista */
-    }
-
-    .footer-buttons {
-        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
-        align-items: center; /* Centrar los botones */
-    }
-
-    footer button {
-        width: 80%; /* Botones más anchos en pantallas pequeñas */
-        margin-bottom: 10px; /* Espacio entre botones */
+    .social-icon {
+        font-size: 1.2em; /* Disminuir el tamaño de los íconos en móviles */
     }
 }
-
