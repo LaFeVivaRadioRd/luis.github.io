@@ -209,3 +209,35 @@ footer button {
 footer button:hover {
   background: #cc75ff;
 }
+
+//////////////////////////////////////////////
+
+/* Adaptabilidad móvil */
+@media (max-width: 600px) {
+    .content_main {
+        padding: 1em; /* Espaciado para pantallas pequeñas */
+    }
+
+    .schedule h2 {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño */
+    }
+
+    .schedule ul {
+        padding-left: 0; /* Sin padding para la lista */
+    }
+
+    .schedule li {
+        font-size: 0.9em; /* Tamaño de fuente más pequeño para los elementos de la lista */
+    }
+
+    .footer-buttons {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+        align-items: center; /* Centrar los botones */
+    }
+
+    footer button {
+        width: 80%; /* Botones más anchos en pantallas pequeñas */
+        margin-bottom: 10px; /* Espacio entre botones */
+    }
+}
+
