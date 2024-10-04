@@ -1,12 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es"> <!-- Cambiar a 'es' si el contenido es en español -->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Meta para responsividad -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reproductor de música en línea con diseño neumórfico y menú hamburguesa.">
     <title>Reproductor de Música | Test Neumorphism</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous" />
-    <script src="https://kit.fontawesome.com/a6eec1d329.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous" />
+    <style>
+        /* Estilos para el menú hamburguesa */
+        .hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 10px; 
+            position: fixed; 
+            top: 10px; 
+            left: 10px; 
+            z-index: 1000; 
+        }
+        .bar {
+            background-color: #333; 
+            height: 5px;
+            width: 100%;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            right: -250px; 
+            width: 250px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9); 
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease; 
+            z-index: 999; 
+        }
+        .nav ul {
+            list-style-type: none;
+            padding: 20px 0; 
+        }
+        .nav li {
+            margin: 20px 0; 
+            text-align: center;
+        }
+        .nav a {
+            text-decoration: none;
+            font-size: 2em; 
+            transition: color 0.3s;
+        }
+        .nav.active {
+            right: 0; 
+        }
+        /* Estilos para la barra de volumen */
+        #volume-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #volume-container {
+            display: inline-block;
+            width: 80%; /* Ajusta el ancho como desees */
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="content_main ctnt">
@@ -14,23 +104,13 @@
             <img class="cover" src="https://i.ibb.co/G3qL1XT/img.webp" alt="PlayList" />
             <img class="logo rotate" src="https://i.postimg.cc/pT6X0k6d/Logo-Gen-Ap.png" alt="Logo" />
         </div>
-        <div class="content-audio">
-            <div style="display:none;">
-                <iframe src="audio.html" style="border:none; width:0; height:0;"></iframe>
-            </div>
-        </div>
         
-        <!-- Barra de Volumen -->
         <div id="volume-bar">
             <div id="volume-container">
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
             </div>
         </div>
-
-        <div class="audio-time">
-            <span id="current-time">0:00</span>
-            <span id="duration">0:00</span>
-        </div>
+        
         <div class="controls">
             <button class="custom-btn btn-play" id="play">
                 <span id="icon" class="icons fas fa-play"></span>
@@ -38,33 +118,71 @@
         </div>
     </div>
 
-    <!-- Footer con Botones -->
+    <div class="hamburger" id="hamburger" aria-label="Menú de navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+        <nav class="nav" id="nav" aria-hidden="true">
+    <ul>
+        <li><a href="https://facebook.com" target="_blank" aria-label="Facebook" style="color: #3b5998;"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="https://youtube.com" target="_blank" aria-label="YouTube" style="color: #ff0000;"><i class="fab fa-youtube"></i></a></li>
+        <li><a href="https://instagram.com" target="_blank" aria-label="Instagram" style="color: #c13584;"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://tiktok.com" target="_blank" aria-label="TikTok" style="color: #000000;"><i class="fab fa-tiktok"></i></a></li>
+        <li><a href="https://whatsapp.com" target="_blank" aria-label="WhatsApp" style="color: #25D366;"><i class="fab fa-whatsapp"></i></a></li>
+    </ul>
+</nav>
+
+
     <footer>
         <div class="footer-buttons">
-            <button onclick="window.location.href='index.html'">INICIO</button>
-            <button onclick="window.location.href='programas.html'">PROGRAMAS</button>
-            <button onclick="window.location.href='#video-predicas'">VIDEOS</button>
+            <button onclick="window.location.href='index.html'" aria-label="Ir a la página de inicio">INICIO</button>
+            <button onclick="window.location.href='programas.html'" aria-label="Ir a la página de programas">PROGRAMAS</button>
+            <button onclick="window.location.href='#video-predicas'" aria-label="Ir a la sección de videos">VIDEOS</button>
         </div>
     </footer>
 
-    <script src="./script.js"></script>
     <script>
-        const volumeControl = document.getElementById('volume');
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
 
-        // Guardar el volumen en localStorage
-        volumeControl.addEventListener('input', (event) => {
-            const audioIframe = document.querySelector('iframe').contentWindow.document.getElementById('audio');
-            audioIframe.volume = event.target.value;
-            localStorage.setItem('volume', audioIframe.volume); // Guardar el volumen en localStorage
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active'); 
+            hamburger.classList.toggle('toggle'); 
+            nav.setAttribute('aria-hidden', nav.classList.contains('active') ? 'false' : 'true');
         });
 
-        // Recuperar el volumen al cargar la página
+        const volumeControl = document.getElementById('volume');
+        const audioElement = new Audio('https://stream.zeno.fm/6h3t7x62z3quv');
+
+        volumeControl.addEventListener('input', function() {
+            audioElement.volume = this.value;
+            localStorage.setItem('volume', this.value); 
+        });
+
         const savedVolume = localStorage.getItem('volume');
         if (savedVolume) {
-            const audioIframe = document.querySelector('iframe').contentWindow.document.getElementById('audio');
-            audioIframe.volume = savedVolume; // Ajustar el volumen del audio
-            volumeControl.value = savedVolume; // Ajustar el control deslizante
+            volumeControl.value = savedVolume;
+            audioElement.volume = savedVolume; 
         }
+
+        document.getElementById('play').addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play();
+                document.getElementById('icon').classList.remove('fa-play');
+                document.getElementById('icon').classList.add('fa-pause');
+            } else {
+                audioElement.pause();
+                document.getElementById('icon').classList.remove('fa-pause');
+                document.getElementById('icon').classList.add('fa-play');
+            }
+        });
+
+        audioElement.addEventListener('ended', function() {
+            document.getElementById('icon').classList.remove('fa-pause');
+            document.getElementById('icon').classList.add('fa-play');
+        });
     </script>
 </body>
 </html>
