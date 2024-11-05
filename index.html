@@ -80,12 +80,25 @@
             color4: "#FF1F6F",
         });
 
-        // Mantener la radio reproduciendo en segundo plano
+        let wakeLock = null;
+
+        async function requestWakeLock() {
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.log('Wake Lock is active.');
+            } catch (err) {
+                console.error(`${err.name}, ${err.message}`);
+            }
+        }
+
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
+                // La radio debería seguir reproduciendo
                 radio.lunaradio('play');
             } else {
+                // Al regresar, se mantiene la reproducción
                 radio.lunaradio('play');
+                requestWakeLock(); // Solicitar Wake Lock al regresar
             }
         });
 
@@ -95,6 +108,9 @@
                 radio.lunaradio('play');
             }
         }, 5000);
+
+        // Solicitar Wake Lock al cargar la página
+        requestWakeLock();
     </script>
 
     <div class="background_hora">
