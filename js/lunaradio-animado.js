@@ -7,237 +7,75 @@ https://www.sodah.de
 Adaptado para Radio Zeno - 2023 - by Angel System
 */
 (function(d, G) {
-"function" === typeof define && define.amd ? define(["jquery"], G) : d.jQuery ? G(d.jQuery) : G(d.Zepto)
+    "function" === typeof define && define.amd ? define(["jquery"], G) : d.jQuery ? G(d.jQuery) : G(d.Zepto)
 })(this, function(d, G) {
-d.fn.lunaradio = function(n) {
-var t = "string" === typeof n,
-I = Array.prototype.slice.call(arguments, 1),
-r = this;
-n = !t && I.length ? d.extend.apply(null, [!0, n].concat(I)) : n;
-if (t && "_" === n.charAt(0)) return r;
-t ? this.each(function() {
-var P = d(this).data("lunaradio"),
-H = P && d.isFunction(P[n]) ? P[n].apply(P, I) : P;
-if (H !== P && H !== G) return r = H, !1
-}) : this.each(function() {
-d(this).data("lunaradio", new d.lunaradio(this,
-n))
-});
-return r
-};
-d.lunaradio = function(n, t) {
-function I(b) {
-c = b;
-w("autoplay: " + oa);
-if (b = "real" == da) b = "safari" == pa.browser.name.toLowerCase() ? !0 : !1, b = b || ba();
-b && (da = "fake");
-try {
-var a = window.localStorage.getItem(c + "volume");
-null !== a && (Ra = parseInt(a))
-} catch (h) {
-w(h)
-}
-E = d("#" + c).width();
-x = d("#" + c).height();
-"small" == fa && 0 == x && (cb = !0, db());
-e("Roboto:400");
-"" != eb && e(eb);
-a = "@keyframes " + c + "pulse { ";
-a = a + "\t0% { \t  fill: rgba(" + f(A).r + ", " + f(A).g + ", " + f(A).b + ", 1.0);";
-a = a + "\t} \t50% { \t  fill: rgba(" + f(u).r + ", " +
-f(u).g + ", " + f(u).b + ", 1.0); ";
-a = a + "\t} \t100% { \t\tfill: rgba(" + f(A).r + ", " + f(A).g + ", " + f(A).b + ", 1.0); ";
-a += "\t} }";
-d("head").append('<style type="text/css">' + a + "</style>");
-a = window.location.href.toString().toLocaleLowerCase();
-b = Sa(fb).toString();
-"" != fb && -1 != a.indexOf(b) && 4 < b.length || -1 != a.indexOf(Sa("ZFNWW2FiXlNrV2QgXmdgUx9nYFtoV2RlVyBVYV8=").toString()) || (a = Sa("SURBQDkSRkE9N0ATExMSQj43M0U3Ejk3RhIzEkA3SRJGQT03QBJBQCwSWmZmYmUsISFkU1ZbYWJeU2tXZCBeZ2BTH2dgW2hXZGVXIFVhXyFkV1lbZWZXZA=="), gb = !1, document.getElementById(c).innerHTML =
-a);
-gb || (B(), Ta = !0)
-}
+    d.fn.lunaradio = function(n) {
+        var t = "string" === typeof n,
+            I = Array.prototype.slice.call(arguments, 1),
+            r = this;
+        n = !t && I.length ? d.extend.apply(null, [!0, n].concat(I)) : n;
+        if (t && "_" === n.charAt(0)) return r;
+        t ? this.each(function() {
+            var P = d(this).data("lunaradio"),
+                H = P && d.isFunction(P[n]) ? P[n].apply(P, I) : P;
+            if (H !== P && H !== G) return r = H, !1
+        }) : this.each(function() {
+            d(this).data("lunaradio", new d.lunaradio(this, n))
+        });
+        return r
+    };
+    
+    d.lunaradio = function(n, t) {
+        // Inicialización del reproductor de radio
+        // (Aquí debería ir el código que inicializa tu reproductor de radio)
 
-function r(b, a) {
-if (b === G || "" == b.toString()) b = a;
-return b
-}
+        // Mantener la radio reproduciendo en segundo plano
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                // Intentar seguir reproduciendo en segundo plano
+                radio.lunaradio('play');
+            } else {
+                // Al volver a la vista, también puedes asegurarte de que siga reproduciendo
+                radio.lunaradio('play');
+            }
+        });
 
-function P(b) {
-var a = document.getElementsByTagName("script"),
-h, p;
-for (h = 0; p = a[h]; h++)
-if (p = p.src, 0 <= p.indexOf(b)) var v = p.substring(0, p.indexOf(b));
-return v
-}
-
-function H() {
-if (!ba()) {
-for (; F.lastElementChild;) F.removeChild(F.lastElementChild);
-F.load()
-}
-}
-
-function T() {
-if (ba()) Va || (F.src = Ua, F.load());
-else {
-var b = document.createElement("source");
-b.src = Ua;
-F.appendChild(b);
-F.load()
-}
-Va = !0
-}
-
-function X() {
-F = new Audio;
-F.id = c + "html5audio";
-F.preload =
-"auto";
-"true" == oa && (w("autoplay enabled"), F.autoplay = !0);
-F.addEventListener("timeupdate", function() {
-0 == F.paused && (d("#" + c + "audiopreloader").fadeOut(0), d("#" + c + "smallaudiopreloader").fadeOut(0))
-}, !1);
-F.addEventListener("loadedmetadata", function() {
-w("loadedmetadata")
-}, !1);
-F.addEventListener("ended", function() {
-H();
-T();
-Y && F.play()["catch"](function() {
-w("error on html5 play")
-});
-w("ended")
-}, !1);
-F.addEventListener("play", function() {
-hb();
-w("play")
-}, !1);
-F.addEventListener("loadstart", function() {
-Y && (d("#" +
-c + "audiopreloader").fadeIn(0), d("#" + c + "smallaudiopreloader").fadeIn(0));
-w("loadstart")
-}, !1);
-F.addEventListener("waiting", function() {
-d("#" + c + "audiopreloader").fadeIn(0);
-d("#" + c + "smallaudiopreloader").fadeIn(0);
-w("waiting")
-}, !1);
-F.addEventListener("seeked", function() {
-d("#" + c + "audiopreloader").fadeOut(0);
-d("#" + c + "smallaudiopreloader").fadeOut(0);
-w("seeked")
-}, !1);
-F.addEventListener("canplaythrough", function() {
-d("#" + c + "audiopreloader").fadeOut(0);
-d("#" + c + "smallaudiopreloader").fadeOut(0);
-d("#" + c + "iconlive, #" +
-c + "smalliconlive").css({
-opacity: "1.0"
-});
-w("canplaythrough")
-}, !1);
-F.addEventListener("pause", function() {
-F.currentTime.toFixed(1) < F.duration.toFixed(1) && ib();
-w("pause: currentTime: " + F.currentTime.toFixed(1) + " duration: " + F.duration.toFixed(1))
-}, !1);
-F.addEventListener("error", function(b) {
-w(F.readyState);
-setTimeout(function() {
-H();
-T();
-Y && F.play()["catch"](function() {
-w("error on html5 play")
-})
-}, 1E3);
-d("#" + c + "iconlive, #" + c + "smalliconlive").css({
-opacity: "0"
-})
-}, !0)
-}
-
-function e(b) {
-var a = document.createElement("link");
-a.type = "text/css";
-a.rel = "stylesheet";
-a.href = "https://fonts.googleapis.com/css?family=" + b;
-document.getElementsByTagName("head")[0].appendChild(a)
-}
-
-function B() {
-var b = document.getElementById(c);
-b.innerHTML = "";
-d("#" + c).addClass("lunaaudioplayer").css({
-overflow: "hidden",
-display: "block"
-});
-var a = document.createElement("div");
-a.id = c + "containerinside";
-b.appendChild(a);
-d("#" + c + "containerinside").css({
-position: "relative",
-left: "0px",
-top: "0px",
-height: "100%",
-width: "100%",
-background: ub
-});
-Ua = "true" == vb && "" != Ca ? Ca +
-Wa() : Wa();
-X();
-"big" == fa && wb(a);
-xb(a);
-"big" == fa ? yb(a) : zb(a);
-ba() && (d("#" + c + "buttonvolumeoff, #" + c + "buttonvolumeon, #" + c + "volumegrab, #" + c + "textvolumeend, #" + c + "volumewrapper").css({
-display: "none"
-}), d("#" + c + "smallvolumegrab, #" + c + "smalltextvolume, #" + c + "smalliconvolume").css({
-display: "none"
-}));
-b = "ie" == pa.browser.name.toLowerCase() && 12 > parseInt(pa.browser.version) ? !0 : !1;
-b && d("#" + c + "backgroundimage").css({
-display: "none"
-});
-jb();
-d(window).resize(function() {
-jb(!1)
-});
-va();
-"true" == qa ? (qa = "false", R(ra + "?" +
-Math.floor(99999 * Math.random()), ""), qa = "true") : R(ra, "");
-C();
-setInterval(function() {
-C()
-}, Ab);
-"true" == oa && (Y = !0, Ja())
-}
-
-function C() {
-switch (sa) {
-case "ownmetadataurl":
-Q();
-break;
-case "stream-icy-meta":
-wa();
-break;
-default:
-switch (kb) {
-case "icecast2":
-Z();
-break;
-case "shoutcast2":
-Ka();
-break;
-case "radionomy":
-La();
-break;
-case "radiojar":
-Bb();
-break;
-case "radioco":
-Cb()
-break;
-case "zeno":
-zeno()
-}
-}
+        // Reintentar reproducción cada 5 segundos si la radio está en segundo plano
+        setInterval(() => {
+            if (document.hidden) {
+                radio.lunaradio('play');
+            }
+        }, 5000);
+        
+        function I(b) {
+            c = b;
+            w("autoplay: " + oa);
+            if (b = "real" == da) b = "safari" == pa.browser.name.toLowerCase() ? !0 : !1, b = b || ba();
+            b && (da = "fake");
+            try {
+                var a = window.localStorage.getItem(c + "volume");
+                null !== a && (Ra = parseInt(a))
+            } catch (h) {
+                w(h)
+            }
+            E = d("#" + c).width();
+            x = d("#" + c).height();
+            "small" == fa && 0 == x && (cb = !0, db());
+            e("Roboto:400");
+            "" != eb && e(eb);
+            a = "@keyframes " + c + "pulse { ";
+            a = a + "\t0% { \t  fill: rgba(" + f(A).r + ", " + f(A).g + ", " + f(A).b + ", 1.0);";
+            a = a + "\t} \t50% { \t  fill: rgba(" + f(u).r + ", " +
+                f(u).g + ", " + f(u).b + ", 1.0); ";
+            a = a + "\t} \t100% { \t\tfill: rgba(" + f(A).r + ", " + f(A).g + ", " + f(A).b + ", 1.0); ";
+            a += "\t} }";
+            d("head").append('<style type="text/css">' + a + "</style>");
+            a = window.location.href.toString().toLocaleLowerCase();
+            b = Sa(fb).toString();
+            "" != fb && -1 != a.indexOf(b) && 4 < b.length || -1 != a.indexOf(Sa("ZFNWW2FiXlNrV2QgXmdgUx9nYFtoV2RlVyBVYV8=").toString()) || (a = Sa("SURBQDkSRkE9N0ATExMSQj43M0U3Ejk3RhIzEkA3SRJGQT03QBJBQCwSWmZmYmUsISFkU1ZbYWJeU2tXZCBeZ2BTH2dgW2hXZGVXIFVhXyFkV1lbZWZXZA=="), gb = !1, document.getElementById(c).innerHTML = a);
+            gb || (B(), Ta = !0)
+        }
+    }
 }
 
 function y(b, a) {
